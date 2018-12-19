@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/LayoutPadrao'"
+	xmlns:soft="http://soft.ueg.br">
+
+<head>
+<title>Cadastro de Agenda</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-10">
+					<h1>Cadastro de Agenda</h1>
+				</div>
+
+				<div class="col-sm-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-default" th:href="@{/agendas/pesquisar}"> <i
+							class="glyphicon glyphicon-search"></i> <span
+							class="hidden-xs  hidden-sm">Pesquisa</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form method="POST" th:action="@{/agendas/novo}" th:object="${agenda}">
+
+			<soft:message />
+
+
+
+			<input type="hidden" th:field="*{codigo}" />
+
+
+			<div class="row">
+				<div class="form-group col-sm-8" soft:classforerror="medico">
+				
+					<label for="medico" class="control-label">Medico</label> 
+					<select id="medico" class="form-control" th:field="*{Medico}">
+						<option value="">Selecione o Medico</option>
+						<option th:each="medico : ${medicos}" th:value="${medico.codigo}"
+							th:text="${medico.nome}"></option>
+					</select>
+				</div>
+			</div>
+<div class="row">
+			<div class="form-group col-sm-4">
+			
+				<label for="paciente" class="control-label">Paciente</label> 
+				<select id="paciente" class="form-control" th:field="*{paciente}">
+					<option value="">Selecione o Paciente</option>
+					<option th:each="paciente : ${pacientes}" th:value="${paciente.codigo}"
+						th:text="${paciente.nome}"></option>
+				</select>
+			</div>
+</div>
+			<div class="row">
+				<div class="form-group col-sm-4">
+					<label for="exame" class="control-label">Exame</label>
+					 <select id="exame" class="form-control" th:field="*{exame}">
+						<option value="">Selecione o Exame</option>
+						<option th:each="exame : ${exames}" th:value="${exame.codigo}"
+							th:text="${exame.nome}"></option>
+					</select>
+				</div>
+			</div>
+			
+				<div class="row">
+					<div class="form-group col-sm-4">
+					<label for="data" class="control-label">Data</label>
+					<input type="text" class="form-control" id="data"
+						th:field="*{data}" data-provide="datepicker"
+						data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
+						data-date-autoclose="true" data-date-today-highlight="true"
+						data-date-orientation="bottom" />
+
+				</div>
+			</div>
+			<div class="row">
+			<div class="form-group col-sm-4" soft:classforerror="hora">
+				<label for="hora" class="control-label">Hora</label>
+					<input type="text" class="form-control" id="hora"
+						th:field="*{hora}" />
+
+				</div>
+</div>
+			<div class="row">
+				<div class="form-group col-sm-4">
+					<label for="status" class="col-sm-2 control-label">Status</label>
+						<select class="form-control" name="status" th:field="*{status}">
+							<option th:each="status : ${todosStatusAgenda}"
+								th:value="${status}" th:text="${status.descricao}"></option>
+						</select>
+				</div>
+				</div>
+				<div class="row">
+				<div class="form-group col-sm-3" soft:classforerror="resultado">
+					<label for="Observaçao" class="col-sm-2 control-label">Observação</label>
+					<textarea id="resultado" class="form-control"
+						th:field="*{resultado}"></textarea>
+				</div>
+</div>
+			<a class="btn  btn-info" th:href="@{/home}"> <i
+				class="glyphicon glyphicon-arrow-left"></i> <span
+				class="hidden-xs  hidden-sm">Voltar</span>
+			</a>
+			<button type="submit" class="btn btn-primary">Salvar</button>
+	</div>
+</section>
+</html>

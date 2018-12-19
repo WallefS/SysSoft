@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/LayoutPadrao'"
+	xmlns:soft="http://soft.ueg.br"
+	xmlns:data="http://www.thymeleaf.org/extras/data">
+
+<head>
+<title>Cadastro de Pacientes</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-10">
+					<h1>Cadastro de Pacientes</h1>
+				</div>
+
+				<div class="col-sm-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-default" th:href="@{/pacientes/pesquisar}">
+							<i class="glyphicon glyphicon-search"></i> <span
+							class="hidden-xs  hidden-sm">Pesquisa</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form method="POST" th:object="${paciente}" th:action="@{/pacientes/novo}">
+			<soft:message />
+			
+
+			<div class="row">
+				<div class="form-group col-sm-8" soft:classforerror="nome">
+
+					<label for="nome" class="control-label">Nome</label> <input
+						type="text" class="form-control" id="nome " th:field="*{nome}" />
+				</div>
+
+
+				<div class="form-group col-sm-4 " soft:classforerror="dataNasc">
+
+					<label for="cnpj" class="control-label">Data de Nascimento</label>
+					<input type="text" class="form-control" id="dataNasc"
+						th:field="*{dataNasc}" data-provide="datepicker"
+						data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
+						data-date-autoclose="true" data-date-today-highlight="true"
+						data-date-orientation="bottom" />
+
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-sm-4">
+
+					<label for="logradouro" class="control-label">Logradouro</label> <input
+						type="text" class="form-control" id="logradouro" th:field="*{endereco.logradouro}" />
+				</div>
+
+
+				<div class="form-group col-sm-4">
+
+					<label for="numero" class="control-label">Numero</label> <input 
+					type="text" class="form-control" id="numero" th:field="*{endereco.numero}" />
+				</div>
+
+
+				<div class="form-group col-sm-4">
+					<label for="bairro" class="control-label">Bairro</label> <input
+						type="text" class="form-control" id="bairro" th:field="*{endereco.complemento}" />
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="form-group col-sm-3">
+					<label for="estado">Estado</label> 
+					<select id="estado"class="form-control" th:field="*{endereco.estado}">
+						<option value="">Selecione o estado</option>
+						<option th:each="estado : ${estados}" th:value="${estado.codigo}" th:text="${estado.nome}">São Paulo</option>
+					</select>
+				</div>
+
+				<div class="form-group col-sm-3">
+
+					<label for="cidade">Cidade</label>
+					<div class="bw-field-action">
+						<input type="hidden" id="inputHiddenCidadeSelecionada" th:value="*{endereco.cidade} != null ? *{endereco.cidade.codigo}" />
+						<select id="cidade" class="form-control" data:url="@{/cidades}" th:field="*{endereco.cidade}">
+						</select>
+						
+						<div class="bw-field-action__icon  js-img-loading" style="display: none">
+							<img th:src="@{/images/mini-loading.gif}"/>
+						</div>
+
+					</div>
+					<br> <a class="btn  btn-info" th:href="@{/home}"> <i
+						class="glyphicon glyphicon-arrow-left"></i> <span
+						class="hidden-xs  hidden-sm">Voltar</span>
+					</a>
+					<button type="submit" class="btn btn-primary">Salvar</button>
+				</div>
+			</div>
+
+		</form>
+	</div>
+</section>
+
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/javascripts/cliente.combo-estado-cidade.js}"></script>
+</th:block>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<aside class="aw-layout-sidebar  js-sidebar"
+		th:fragment="layout-sidebar">
+		<div class="aw-layout-sidebar__content">
+
+			<nav class="aw-menu  js-menu">
+				<ul class="aw-menu__list">
+
+					<li class="aw-menu__item"><a th:href="@{/home/}"><i
+							class="fa  fa-fw  fa-home"></i><span>SOFT</span></a></li>
+
+					<li class="aw-menu__item"><a href="#"> <i
+							class="fa fa-user"></i><span>Medicos</span> <i
+							class="aw-menu__navigation-icon  fa"></i>
+					</a>
+
+						<ul class="aw-menu__list  aw-menu__list--sublist">
+							<li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/medicos/novo}">Novo Medico</a></li>
+							<li class="aw-menu__item aw-menu__item--link"><a th:href="@{/medicos/pesquisar}">Listar Medicos</a></li>
+							
+
+						</ul></li>
+
+
+					<li class="aw-menu__item"><a href="#"> <i
+							class="fa fa-child"></i><span>Pacientes
+					</span> <i class="aw-menu__navigation-icon  fa"></i>
+					</a>
+
+						<ul class="aw-menu__list  aw-menu__list--sublist">
+							<li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/pacientes/novo}">Novo
+									Paciente</a></li>
+							<li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/pacientes/pesquisar}">Listar Pacientes</a></li>
+						</ul></li>
+
+
+					<li class="aw-menu__item"><a href="#"> <i
+							class="fa fa-file-text-o"></i><span>Exame</span> <i
+							class="aw-menu__navigation-icon  fa"></i>
+					</a>
+
+						<ul class="aw-menu__list  aw-menu__list--sublist">
+							<li class="aw-menu__item  aw-menu__item--link"><a
+								th:href="@{/exames/novo/}">Novo Exame</a></li>
+							<li class="aw-menu__item  aw-menu__item--link"><a
+								th:href="@{/exames/pesquisar}">Pesquisar Exame</a></li>
+
+						</ul></li>
+
+
+					<li class="aw-menu__item"><a href="#"> <i
+							class="fa fa-calendar"></i><span>Agenda</span> <i
+							class="aw-menu__navigation-icon  fa"></i>
+					</a>
+
+						<ul class="aw-menu__list  aw-menu__list--sublist">
+							<li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/agendas/novo}">Cadastrar
+									agenda</a></li>
+							<li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/agendas/pesquisar}">Pesquisar
+									agenda</a></li>
+
+						</ul></li>
+
+
+					<li class="aw-menu__item"><a href="#"> <i
+							class="fa fa-university"></i><span>Empresa</span> <i
+							class="aw-menu__navigation-icon  fa"></i>
+					</a>
+
+						<ul class="aw-menu__list  aw-menu__list--sublist">
+							<li class="aw-menu__item  aw-menu__item--link"><a
+								th:href="@{/empresas/novo}">Cadastrar Empresa</a></li>
+							<li class="aw-menu__item  aw-menu__item--link"><a
+								th:href="@{/empresas/pesquisar}">Pesquisar Empresa</a></li>
+
+						</ul>
+						</li>
+						<li class="aw-menu__item"><a href="#"> <i
+							class="fa fa-tag"></i><span>Cidades</span> <i
+							class="aw-menu__navigation-icon  fa"></i>
+					</a>
+
+						<ul class="aw-menu__list  aw-menu__list--sublist">
+							<li class="aw-menu__item  aw-menu__item--link"><a
+								th:href="@{/cidades/nova}">Cadastrar Cidade</a></li>
+							<li class="aw-menu__item  aw-menu__item--link"><a
+								th:href="@{/cidades}">Pesquisar Cidade</a></li>
+
+						</ul>
+						</li>
+
+							<li class="aw-menu__item"><a href="#">
+							 <i class="fa fa-file-pdf-o" aria-hidden="true">
+							 </i>
+							 <span>Relatorios</span> 
+							 <i class="aw-menu__navigation-icon  fa"></i>
+					</a>
+
+						<ul class="aw-menu__list  aw-menu__list--sublist">
+							<li class="aw-menu__item  aw-menu__item--link"><a
+								href="">Novo</a></li>
+							
+
+						</ul>
+						
+						</li>
+
+
+
+				</ul>
+			</nav>
+		</div>
+	</aside>
+</body>
+</html>

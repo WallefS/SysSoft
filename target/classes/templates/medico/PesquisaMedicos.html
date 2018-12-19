@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:soft="http://soft.ueg.br"
+	xmlns:data="http://www.thymeleaf.org/extras/data">
+
+<head>
+<title>Pesquisa de Medicos</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1>Pesquisa de Medicos</h1>
+				</div>
+
+				<div class="col-xs-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-default" th:href="@{/medicos/novo}"> <i
+							class="glyphicon  glyphicon-plus-sign"></i> <span
+							class="hidden-xs  hidden-sm">Novo Medico</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container-fluid">
+		<form method="GET" th:object="${medicoFilter}">
+			<div class="row">
+				<div class="form-group  col-sm-12">
+					<label class="control-label" for="nome">Medico</label> <input
+						type="text" class="form-control" id="nome" autofocus="autofocus"
+						th:field="*{nome}" />
+				</div>
+			</div>			
+
+			<button type="submit" class="btn  btn-primary">Pesquisar</button>
+		</form>
+
+		<div class="table-responsive  bw-tabela-simples">
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th class="text-center col-md-1">#</th>
+						<th><soft:order page="${pagina}" field="nome" text="Nome" />
+						<th>Cbo</th>
+						<th>Cpf</th>
+						<th class="col-md-1"></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="medico:${pagina.conteudo}">
+						<td class="text-center" th:text="${medico.codigo}">1</td>
+						<td th:text="${medico.nome}"></td>
+						<td th:text="${medico.cbo}"></td>
+						<td th:text="${medico.cpf}"></td>
+
+						<td class="text-center"><a class="btn btn-link btn-xs"
+							th:href="@{/medicos/{codigo}(codigo=${medico.codigo})}" title="Editar"
+							rel="tooltip" data-placement="top"> <span
+								class="glyphicon glyphicon-pencil"></span>
+						</a> <a class="btn  btn-link  btn-xs  js-tooltip  js-exclusao-btn"
+							title="Excluir" href="#"
+							data:url="@{/medicos/{codigo}(codigo=${medico.codigo})}"
+							data:objeto="${medico.nome}"> <i
+								class="glyphicon glyphicon-remove"></i>
+						</a></td>
+					</tr>
+					<tr th:if="${pagina.vazia}">
+							<td colspan="3">Nenhum Medico encontrado</td>
+						</tr>
+				</tbody>
+			</table>
+			<soft:pagination page="${pagina}" />
+		</div>
+
+	</div>
+</section>
+</html>

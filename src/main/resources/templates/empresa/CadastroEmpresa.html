@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/LayoutPadrao'"
+	xmlns:soft="http://soft.ueg.br">
+
+<head>
+<title>Cadastro de Empresa</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-10">
+					<h1>Cadastro de Empresa</h1>
+				</div>
+
+				<div class="col-sm-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-default" th:href="@{/empresas/pesquisar}">
+							<i class="glyphicon glyphicon-search"></i> <span
+							class="hidden-xs  hidden-sm">Pesquisa</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form method="POST" th:action="@{/empresas/novo}"
+			th:object="${empresa}">
+
+			<soft:message />
+
+
+
+			<input type="hidden" th:field="*{id}" />
+
+			<div class="row">
+				<div class="form-group col-sm-8" soft:classforerror="nome">
+
+					<label for="nome" class="control-label">Nome</label> <input
+						type="text" class="form-control" id="nome " th:field="*{nome}" />
+				</div>
+
+
+				<div class="form-group col-sm-4 " soft:classforerror="cnpj">
+					<label for="cnpj" class="control-label">CNPJ</label> <input
+						type="text" class="form-control" id="cnpj" th:field="*{cnpj}" />
+
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-sm-4" soft:classforerror="endereco">
+
+					<label for="endereco" class="control-label">Endereço</label> <input
+						type="text" class="form-control" id="endereco"
+						th:field="*{endereco}" />
+				</div>
+
+
+				<div class="form-group col-sm-4" soft:classforerror="numero">
+
+					<label for="numero" class="control-label">Numero</label> <input
+						type="text" class="form-control" id="numero" th:field="*{numero}" />
+
+				</div>
+
+
+				<div class="form-group col-sm-4" soft:classforerror="bairro">
+
+					<label for="bairro" class="control-label">Bairro</label> <input
+						type="text" class="form-control" id="bairro" th:field="*{bairro}" />
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="form-group col-sm-3" soft:classforerror="telefone1">
+
+					<label for="telefone1" class="control-label">Telefone</label> <input
+						type="text" class="form-control js-phone-number" id="telefone1"
+						th:field="*{telefone1}" />
+
+				</div>
+
+				<div class="form-group col-sm-3" soft:classforerror="telefone">
+
+					<label for="telefone" class="control-label">Celular</label> <input
+						type="text" class="form-control js-phone-number" id="telefone"
+						th:field="*{telefone}" />
+				</div>
+
+
+
+				<div class="form-group col-sm-6" soft:classforerror="email">
+
+					<label for="email" class="control-label">E-mail</label> <input
+						type="text" class="form-control " id="email" th:field="*{email}" />
+				</div>
+
+			</div>
+			<br> <a class="btn  btn-info" th:href="@{/home}"> <i
+				class="glyphicon glyphicon-arrow-left"></i> <span
+				class="hidden-xs  hidden-sm">Voltar</span>
+			</a>
+			<button type="submit" class="btn btn-primary">Salvar</button>
+
+		</form>
+	</div>
+
+
+</section>
+
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/javascripts/speed.mascara.js}"></script>
+	<script th:src="@{/javascripts/vendors/jquery.masknumber.min.js}"></script>
+	<script th:src="@{/javascripts/vendors/jquery.mask.min.js}"></script>
+</th:block>
+</html>

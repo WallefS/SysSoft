@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:soft="http://soft.ueg.br"
+	xmlns:data="http://www.thymeleaf.org/extras/data">
+
+<head>
+<title>Pesquisa de Empresa</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+
+
+<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1>Pesquisa de Empresas</h1>
+				</div>
+				
+				<div class="col-xs-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-default" th:href="@{/empresas/novo}">
+							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Nova Empresa</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+		<div class="container-fluid">
+			<form method="GET" th:object="${empresaFilter}">
+				<div class="row">
+					<div class="form-group  col-sm-6">
+						<label class="control-label" for="nome">Empresa</label> <input
+							type="text" class="form-control" id="empresa"
+							autofocus="autofocus" th:field="*{nome}" />
+					</div>
+
+					<div class="form-group  col-sm-6">
+						<label class="control-label" for="cnpj">Cnpj</label> <input
+							type="text" class="form-control" id="cnpj" autofocus="autofocus"
+							th:field="*{cnpj}" />
+					</div>
+				</div>
+
+				<button type="submit" class="btn  btn-primary">Pesquisar</button>
+			</form>
+
+		<div class="table-responsive  bw-tabela-simples">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center col-md-1">#</th>
+							<th><soft:order page="${pagina}" field="nome" text="Nome" />
+							</th>
+
+							
+							<th><soft:order page="${pagina}" field="cnpj" text="Cnpj" />
+							</th>
+							<th>Telefone</th>
+							<th class="col-md-1"></th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr th:each="empresa:${pagina.conteudo}">
+							<td class="text-center" th:text="${empresa.id}">1</td>
+							<td th:text="${empresa.nome}"></td>
+							<td th:text="${empresa.cnpj}"></td>
+							<td th:text="${empresa.telefone1}"></td>
+
+							<td class="text-center"><a
+								class="btn  btn-link  btn-xs  js-tooltip"
+								th:href="@{/empresas/{id}(id=${empresa.id})}" title="Editar"
+								rel="tooltip" data-placement="top"> <i
+									class="glyphicon glyphicon-pencil"></i>
+							</a> <a class="btn  btn-link  btn-xs  js-tooltip  js-exclusao-btn"
+								title="Excluir" href="#"
+								data:url="@{/empresas/{id}(id=${empresa.id})}"
+								data:objeto="${empresa.nome}"> <i
+									class="glyphicon glyphicon-remove"></i>
+							</a></td>
+						</tr>
+						<tr th:if="${pagina.vazia}">
+							<td colspan="3">Nenhuma Empresa encontrado</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<soft:pagination page="${pagina}" />
+
+
+
+			</div>
+		</div>
+	
+</section>
+</html>

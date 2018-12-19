@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/LayoutPadrao'">
+
+<head>
+<title>Relatorio Geral</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+	<br> </br>
+	<h1 align="center">Relatorios</h1>
+
+
+	<div class="row">
+		<div class="col-sm-6 col-md-4">
+			<div class="thumbnail">
+
+				<div class="caption">
+					<h3>Relatorio de Documentos</h3>
+					<p>Lista todos os documentos do
+					Sistema</p>
+					<p>
+						<a th:href="@{/relatorio/documentos}" class="btn btn-primary"
+							role="button" target="_blank">Abrir</a>
+					</p>
+				</div>
+			</div>
+
+		</div>
+
+<div class="col-sm-6 col-md-4">
+			<div class="thumbnail">
+
+				<div class="caption">
+					<h3>Relatorio de Departamentos</h3>
+					<p>Lista todos os documentos do
+					Sistema</p>
+					<p>
+						<a th:href="@{/relatorio/departamentos}" class="btn btn-primary"
+							role="button" target="_blank">Abrir</a>
+					</p>
+				</div>
+			</div>
+
+		</div>
+		
+		
+		<div class="col-sm-6 col-md-4">
+			<div class="thumbnail">
+
+				<div class="caption">
+					<h3>Relatorio de Empresas</h3>
+					<p>Mostra os documentos do Sistema</p>
+					<p>
+						<a th:href="@{/relatorio/empresas}" class="btn btn-primary"
+							role="button" target="_blank" >Abrir</a>
+					</p>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+
+
+</section>
+</html>

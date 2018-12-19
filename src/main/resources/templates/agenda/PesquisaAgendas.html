@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:soft="http://soft.ueg.br"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+<title>Pesquisa de Agenda</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1>Pesquisa de Agendas</h1>
+				</div>
+
+				<div class="col-xs-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-default" th:href="@{/agendas/novo}"> <i
+							class="glyphicon  glyphicon-plus-sign"></i> <span
+							class="hidden-xs  hidden-sm">Nova Agenda</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container-fluid">
+	<form method="GET" th:object="${agendaFilter}">
+		<div class="row">
+			<div class="form-group  col-sm-6">
+				<label class="control-label" for="nome">Agenda</label> <input
+					type="text" class="form-control" id="agenda" autofocus="autofocus"
+					th:field="*{nome}" />
+			</div>
+
+		</div>
+
+		<button type="submit" class="btn  btn-primary">Pesquisar</button>
+	</form>
+
+	<div class="table-responsive  bw-tabela-simples">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th class="text-center col-md-1">#</th>
+					<th>Medico</th>
+					<th>Paciente</th>
+					<th>Exame</th>
+					<th>Observação</th>
+					<th>Data</th>
+					<th>Hora</th>
+					<th class="text-center col-md-1">Status</th>
+					<th class="col-md-1"sec:authorize="hasRole('ROLE_CADASTRAR_CIDADE')"></th>
+					
+					
+					
+					
+					
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="agenda:${pagina.conteudo}">
+					<td class="text-center" th:text="${agenda.codigo}">1</td>
+					<td th:text="${agenda.medico}"></td>
+					<td th:text="${agenda.paciente}"></td>
+					<td th:text="${agenda.exame}"></td>
+					<td th:text="${agenda.resultado}"></td>
+					<td th:text="${agenda.data}"></td>
+					<td th:text="${agenda.hora}"></td>
+					<td class="text-center" th:attr="data-role=${agenda.codigo}">
+					
+					<span class="label" th:text="${agenda.status.descricao}"
+						th:classappend="${agenda.pendente ? 'label-danger' : 'label-success'}"></span>
+						</td>
+
+					<td class="text-center"sec:authorize="hasRole('ROLE_CADASTRAR_CIDADE')">
+					<a class="btn btn-link btn-xs"
+						th:href="@{/agendas/{codigo}(codigo=${agenda.codigo})}" title="Editar"
+						rel="tooltip" data-placement="top"> 
+						<span class="glyphicon glyphicon-pencil"></span>
+					</a> 
+					<a class="btn  btn-link  btn-xs  js-tooltip  js-exclusao-btn"title="Excluir" href="#"
+						data:url="@{/agendas/{codigo}(codigo=${agenda.codigo})}"
+						data:objeto="${agenda.codigo}"> 
+						<i class="glyphicon glyphicon-remove"></i>
+					</a> 
+					<a class="btn btn-link btn-xs js-atualizar-status"
+						th:if="${agenda.pendente}" title="Agendar" rel="tooltip"
+						data-placement="top" th:attr="data-codigo=${agenda.codigo}"
+						th:href="@{/agendas/{codigo}/receber(codigo=${agenda.codigo})}"> <span
+							class="glyphicon glyphicon-check"></span>
+					</a></td>
+				</tr>
+				<tr th:if="${pagina.vazia}">
+					<td colspan="3">Nenhuma Agenda encontrado</td>
+				</tr>
+			</tbody>
+		</table>
+		<soft:pagination page="${pagina}" />
+</div>
+	</div>
+</section>
+</html>
